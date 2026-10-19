@@ -30,7 +30,7 @@ export class ProgramExecSessionAuthority
 {
   type = AuthorityType.ProgramExecSession;
 
-  constructor(public data: Uint8Array) {
+  constructor(public override data: Uint8Array) {
     super(data);
   }
 
@@ -210,7 +210,7 @@ export class ProgramExecSessionAuthority
     swigAddress: SolPublicKeyData;
     newSessionKey: SolPublicKeyData;
     roleId: number;
-    sessionDuration?: bigint;
+    sessionDuration?: bigint | undefined;
     options: InstructionDataOptions;
   }) {
     return ProgramExecInstruction.createSessionV1Instruction(
@@ -333,7 +333,7 @@ export class ProgramExecSessionAuthority
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
+    tokenProgram?: SolPublicKeyData | undefined;
     options: InstructionDataOptions;
   }) {
     const mint = new SolPublicKey(args.mint).toAddress();

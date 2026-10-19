@@ -22,7 +22,7 @@ export class Ed25519SessionAuthority
 {
   type = AuthorityType.Ed25519Session;
 
-  constructor(public data: Uint8Array) {
+  constructor(public override data: Uint8Array) {
     super(data);
   }
 
@@ -189,7 +189,7 @@ export class Ed25519SessionAuthority
     swigAddress: SolPublicKeyData;
     newSessionKey: SolPublicKeyData;
     roleId: number;
-    sessionDuration?: bigint;
+    sessionDuration?: bigint | undefined;
   }) {
     return Ed25519Instruction.createSessionV1Instruction(
       {
@@ -302,7 +302,7 @@ export class Ed25519SessionAuthority
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
+    tokenProgram?: SolPublicKeyData | undefined;
   }) {
     const mint = new SolPublicKey(args.mint).toAddress();
     const swigSystemAddress = new SolPublicKey(

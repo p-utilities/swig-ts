@@ -20,7 +20,7 @@ export type BatchTransactionConfig = {
     | Readonly<{ blockhash: Blockhash; lastValidBlockHeight: bigint }>;
   signers?: Array<{ publicKey: SolPublicKeyData }>;
   withSubAccount?: boolean;
-  options?: SwigOptions;
+  options?: SwigOptions | undefined;
 };
 
 /**

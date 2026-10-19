@@ -223,7 +223,7 @@ export class Secp256k1SessionAuthority
     swigAddress: SolPublicKeyData;
     newSessionKey: SolPublicKeyData;
     roleId: number;
-    sessionDuration?: bigint;
+    sessionDuration?: bigint | undefined;
     options: InstructionDataOptions;
   }) {
     return Secp256k1Instruction.createSessionV1Instruction(
@@ -345,7 +345,7 @@ export class Secp256k1SessionAuthority
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
+    tokenProgram?: SolPublicKeyData | undefined;
     options: InstructionDataOptions;
   }) {
     const mint = new SolPublicKey(args.mint).toAddress();

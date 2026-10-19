@@ -296,7 +296,7 @@ export class Secp256r1Authority
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
+    tokenProgram?: SolPublicKeyData | undefined;
     options: InstructionDataOptions;
   }) {
     const mint = new SolPublicKey(args.mint).toAddress();

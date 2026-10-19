@@ -223,7 +223,7 @@ function clientDataFieldOrder(jsonStr: string): Uint8Array {
 
   keysInOrder.forEach((key, index) => {
     if (index < 4 && key in keyToEnum) {
-      result[index] = keyToEnum[key];
+      result[index] = keyToEnum[key]!;
     }
   });
 

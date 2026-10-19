@@ -116,7 +116,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: AddAuthorityV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const addV1InstructionDataEncoder = getAddAuthorityV1InstructionCodec(
       data.authorityPayload.length,
@@ -141,7 +141,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: RemoveAuthorityV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const removeV1InstructionDataEncoder = getRemoveAuthorityV1InstructionCodec(
       data.authorityPayload.length,
@@ -159,7 +159,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: UpdateAuthorityV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getUpdateAuthorityV1InstructionCodec().encoder;
 
@@ -181,7 +181,7 @@ export class SwigInstructionV1 {
   static sign<T extends [...SignV1BaseAccountMetas, ...SolAccountMeta[]]>(
     accounts: T,
     data: SignV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const signV1InstructionDataEncoder = getSignV1InstructionCodec(
       data.authorityPayload.length,
@@ -199,7 +199,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: CreateSessionV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const createSessionV1InstructionDataEncoder =
       getCreateSessionV1InstructionCodec().encoder;
@@ -216,7 +216,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: SubAccountCreateV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const subAccountCreateV1InstructionDataEncoder =
       getSubAccountCreateV1InstructionDataCodec().encoder;
@@ -234,7 +234,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: SubAccountSignV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getSubAccountSignV1InstructionDataCodec().encoder;
 
@@ -250,7 +250,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: SubAccountWithdrawV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getSubAccountWithdrawV1InstructionDataCodec().encoder;
 
@@ -266,7 +266,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: SubAccountToggleV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getSubAccountToggleV1InstructionDataCodec().encoder;
 
@@ -282,7 +282,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: TransferAssetsV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getTransferAssetsV1InstructionDataCodec().encoder;
 
@@ -298,7 +298,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: CloseSwigV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getCloseSwigV1InstructionDataCodec().encoder;
 
@@ -314,7 +314,7 @@ export class SwigInstructionV1 {
   >(
     accounts: T,
     data: CloseTokenAccountV1InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getCloseTokenAccountV1InstructionDataCodec().encoder;
 
@@ -330,7 +330,7 @@ export class SwigInstructionV2 {
   static sign<T extends [...SignV2BaseAccountMetas, ...SolAccountMeta[]]>(
     accounts: T,
     data: SignV2InstructionDataArgs,
-    options?: SwigInstructionContextOptions,
+    options?: SwigInstructionContextOptions | undefined,
   ): SwigInstructionContext {
     const encoder = getSignV2InstructionCodec(
       data.authorityPayload.length,

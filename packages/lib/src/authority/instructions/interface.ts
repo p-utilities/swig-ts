@@ -41,7 +41,7 @@ export interface AuthorityInstruction {
     data: Omit<AddAuthorityV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   removeAuthorityV1Instruction(
@@ -49,7 +49,7 @@ export interface AuthorityInstruction {
     data: Omit<RemoveAuthorityV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   updateAuthorityV1Instruction(
@@ -57,7 +57,7 @@ export interface AuthorityInstruction {
     data: Omit<UpdateAuthorityV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   signV1Instruction(
@@ -67,7 +67,7 @@ export interface AuthorityInstruction {
       roleId: number;
       innerInstructions: SolInstruction[];
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   signV2Instruction(
@@ -77,7 +77,7 @@ export interface AuthorityInstruction {
       roleId: number;
       innerInstructions: SolInstruction[];
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   createSessionV1Instruction(
@@ -85,7 +85,7 @@ export interface AuthorityInstruction {
     data: Omit<CreateSessionV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   subAccountCreateV1Instruction(
@@ -93,7 +93,7 @@ export interface AuthorityInstruction {
     data: Omit<SubAccountCreateV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   subAccountSignV1Instruction(
@@ -103,7 +103,7 @@ export interface AuthorityInstruction {
       roleId: number;
       innerInstructions: SolInstruction[];
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   subAccountWithdrawV1SolInstruction(
@@ -111,7 +111,7 @@ export interface AuthorityInstruction {
     data: Omit<SubAccountWithdrawV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   subAccountWithdrawV1TokenInstruction(
@@ -119,7 +119,7 @@ export interface AuthorityInstruction {
     data: Omit<SubAccountWithdrawV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   subAccountToggleV1Instruction(
@@ -127,7 +127,7 @@ export interface AuthorityInstruction {
     data: Omit<SubAccountToggleV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   transferAssetsV1Instruction(
@@ -135,7 +135,7 @@ export interface AuthorityInstruction {
     data: Omit<TransferAssetsV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   closeSwigV1Instruction(
@@ -143,7 +143,7 @@ export interface AuthorityInstruction {
     data: Omit<CloseSwigV1InstructionDataArgs, 'authorityPayload'> & {
       authorityData: ReadonlyUint8Array;
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 
   closeTokenAccountV1Instruction(
@@ -155,7 +155,7 @@ export interface AuthorityInstruction {
       authorityData: ReadonlyUint8Array;
       tokenAccounts: ReadonlyUint8Array[];
     },
-    options?: InstructionDataOptions,
+    options?: InstructionDataOptions | undefined,
   ): Promise<SwigInstructionContext>;
 }
 
@@ -184,12 +184,12 @@ export type SigningResult = {
  */
 export type InstructionDataOptions = {
   signingFn?: SigningFn;
-  currentSlot?: bigint;
-  odometer?: number;
+  currentSlot?: bigint | undefined;
+  odometer?: number | undefined;
   preInstructions?: SolInstruction[];
   postInstructions?: SolInstruction[];
   /** Transaction fee payer. Used by secp256r1/secp256k1 authorities to ensure
    *  the payer account is marked as a signer before computing the message hash,
    *  matching the Solana runtime behavior. See https://github.com/anagrambuild/swig-ts/issues/107 */
-  payer?: SolPublicKeyData;
+  payer?: SolPublicKeyData | undefined;
 };

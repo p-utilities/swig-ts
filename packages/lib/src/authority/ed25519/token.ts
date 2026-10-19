@@ -254,7 +254,7 @@ export class Ed25519Authority
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
+    tokenProgram?: SolPublicKeyData | undefined;
   }) {
     const mint = new SolPublicKey(args.mint).toAddress();
     const swigSystemAddress = new SolPublicKey(

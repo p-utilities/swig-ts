@@ -520,7 +520,7 @@ export async function prepareSecpPayload(
   options: {
     signingFn: SigningFn;
     currentSlot: bigint;
-    odometer?: number;
+    odometer?: number | undefined;
   },
 ): Promise<Uint8Array> {
   const u64Len = 8;
