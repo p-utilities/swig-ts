@@ -85,7 +85,7 @@ export function compactInstructions<
 
       const accountIndex = hashmap.get(ixAccount.publicKey.toBase58());
       if (accountIndex !== undefined) {
-        const existingAccount = accounts[accountIndex];
+        const existingAccount = accounts[accountIndex]!;
         // Upgrade privileges if needed
         if (ixAccount.writable && !existingAccount.writable) {
           existingAccount.setWritable(true);

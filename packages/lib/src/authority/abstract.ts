@@ -97,7 +97,7 @@ export abstract class Authority {
     payer: SolPublicKeyData;
     roleId: number;
     innerInstructions: SolInstruction[];
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -115,7 +115,7 @@ export abstract class Authority {
     swigSystemAddress: SolPublicKeyData;
     roleId: number;
     innerInstructions: SolInstruction[];
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -137,7 +137,7 @@ export abstract class Authority {
     actingRoleId: number;
     actions: Actions;
     newAuthorityInfo: CreateAuthorityInfo;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -156,7 +156,7 @@ export abstract class Authority {
     swigAddress: SolPublicKeyData;
     roleId: number;
     roleIdToRemove: number;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -176,7 +176,7 @@ export abstract class Authority {
     roleId: number;
     roleIdToUpdate: number;
     updateActionsInfo: UpdateAuthorityActionsInfo;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract subAccountCreate(args: {
@@ -184,7 +184,7 @@ export abstract class Authority {
     swigAddress: SolPublicKeyData;
     swigId: Uint8Array;
     roleId: number;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract subAccountSign(args: {
@@ -193,7 +193,7 @@ export abstract class Authority {
     subAccount: SolPublicKeyData;
     roleId: number;
     innerInstructions: SolInstruction[];
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract subAccountToggle(args: {
@@ -203,7 +203,7 @@ export abstract class Authority {
     actingRoleId: number;
     subAccountRoleId: number;
     enabled: boolean;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract subAccountWithdrawSol(args: {
@@ -213,7 +213,7 @@ export abstract class Authority {
     subAccount: SolPublicKeyData;
     roleId: number;
     amount: bigint;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract subAccountWithdrawToken(args: {
@@ -224,8 +224,8 @@ export abstract class Authority {
     roleId: number;
     mint: SolPublicKeyData;
     amount: bigint;
-    tokenProgram?: SolPublicKeyData;
-    options?: InstructionDataOptions;
+    tokenProgram?: SolPublicKeyData | undefined;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   abstract transferAssets(args: {
@@ -233,7 +233,7 @@ export abstract class Authority {
     swigAddress: SolPublicKeyData;
     swigSystemAddress: SolPublicKeyData;
     roleId: number;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -252,7 +252,7 @@ export abstract class Authority {
     swigSystemAddress: SolPublicKeyData;
     destination: SolPublicKeyData;
     roleId: number;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -269,7 +269,7 @@ export abstract class Authority {
     tokenProgram: SolPublicKeyData;
     tokenAccounts: SolPublicKeyData[];
     roleId: number;
-    options?: InstructionDataOptions;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 
   /**
@@ -334,8 +334,8 @@ export abstract class SessionBasedAuthority extends Authority {
     swigAddress: SolPublicKeyData;
     roleId: number;
     newSessionKey: SolPublicKeyData;
-    sessionDuration?: bigint;
-    options?: InstructionDataOptions;
+    sessionDuration?: bigint | undefined;
+    options?: InstructionDataOptions | undefined;
   }): Promise<SwigInstructionContext>;
 }
 

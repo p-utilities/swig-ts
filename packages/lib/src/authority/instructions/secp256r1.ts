@@ -708,7 +708,7 @@ export async function prepareSecp256r1Payload(
   options: {
     signingFn: SigningFn;
     currentSlot: bigint;
-    odometer?: number;
+    odometer?: number | undefined;
   },
 ): Promise<{
   authorityPayload: Uint8Array;

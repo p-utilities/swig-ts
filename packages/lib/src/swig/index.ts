@@ -236,7 +236,7 @@ export const getCreateSwigWithMultipleAuthoritiesInstructionContextBuilder =
 export const getAddMultipleAuthoritiesInstructionsContextBuilder = async (
   swig: Swig,
   roleId: number,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ): Promise<AddMultipleAuthoritiesInstructionContextBuilder> => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -258,7 +258,7 @@ export const getAddAuthorityInstructionContext = async (
   roleId: number,
   newAuthorityInfo: CreateAuthorityInfo,
   actions: Actions,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ): Promise<SwigInstructionContext> => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -282,7 +282,7 @@ export const getRemoveAuthorityInstructionContext = async (
   swig: Swig,
   roleId: number,
   roleIdToRemove: number,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -305,7 +305,7 @@ export const getUpdateAuthorityInstructionContext = async (
   roleId: number,
   roleIdToUpdate: number,
   updateActionsInfo: UpdateAuthorityActionsInfo,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -329,7 +329,7 @@ export const getSignInstructionContext = async (
   roleId: number,
   innerInstructions: SolInstruction[],
   withSubAccount?: boolean,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -377,7 +377,7 @@ export const getCreateSessionInstructionContext = async (
   roleId: number,
   newSessionKey: SolPublicKeyData,
   duration?: bigint,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -405,7 +405,7 @@ export const getCreateSessionInstructionContext = async (
 export const getCreateSubAccountInstructionContext = async (
   swig: Swig,
   roleId: number,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -428,7 +428,7 @@ export const getToggleSubAccountInstructionContext = async (
   roleId: number,
   enabled: boolean,
   subAccountRoleId?: number,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -456,7 +456,7 @@ export const getWithdrawFromSubAccountInstructionContext = async <
   swig: Swig,
   roleId: number,
   args: WithdrawSubAccountArgs<T>,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -503,7 +503,7 @@ export const getWithdrawFromSubAccountCheckedInstructionContext = async <
   swig: Swig,
   roleId: number,
   args: WithdrawSubAccountCheckedArgs<T>,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   let amount = args.amount;
 
@@ -537,7 +537,7 @@ export const getWithdrawFromSubAccountCheckedInstructionContext = async <
 export const getTransferAssetsInstructionContext = async (
   swig: Swig,
   roleId: number,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { payer, role } = await assertInstructionOptions(
     swig,
@@ -565,7 +565,7 @@ export const getCloseSwigInstructionContext = async <
   swig: Swig,
   roleId: number,
   args: CloseSwigArgs<T>,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { role } = await assertInstructionOptions(swig, roleId, false, options);
 
@@ -592,7 +592,7 @@ export const getCloseSwigTokenAccountInstructionContext = async <
   swig: Swig,
   roleId: number,
   args: CloseSwigTokenAccountArgs<T>,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) => {
   const { role } = await assertInstructionOptions(swig, roleId, false, options);
 
@@ -611,7 +611,7 @@ async function assertInstructionOptions(
   swig: Swig,
   roleId: number,
   isSignIx: boolean,
-  options?: SwigOptions,
+  options?: SwigOptions | undefined,
 ) {
   if (options?.preFetch) {
     await swig.refetch();
@@ -677,8 +677,8 @@ export async function getSwigWalletAddressRaw(swig: Swig) {
 export type SwigOptions = {
   preFetch?: boolean;
   signingFn?: SigningFn;
-  currentSlot?: bigint;
-  payer?: SolPublicKeyData;
+  currentSlot?: bigint | undefined;
+  payer?: SolPublicKeyData | undefined;
   preInstructions?: SolInstruction[];
   postInstructions?: SolInstruction[];
 };
@@ -693,7 +693,7 @@ export type WithdrawSubAccountArgs<
   | {
       amount: bigint;
       mint: T;
-      tokenProgram?: T;
+      tokenProgram?: T | undefined;
       subAccountRoleId?: number;
     };
 
@@ -710,7 +710,7 @@ export type WithdrawSubAccountCheckedArgs<
   | {
       amount: bigint;
       mint: T;
-      tokenProgram?: T;
+      tokenProgram?: T | undefined;
       subAccountRoleId?: number;
     };
 

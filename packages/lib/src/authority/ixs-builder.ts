@@ -34,7 +34,7 @@ export class AddMultipleAuthoritiesInstructionContextBuilder {
     swigAddress: SolPublicKeyData;
     authority: Authority;
     roleId: number;
-    options?: AddMultipleAuthoritiesInstructionContextBuilderConfig;
+    options?: AddMultipleAuthoritiesInstructionContextBuilderConfig | undefined;
   }) => {
     return new AddMultipleAuthoritiesInstructionContextBuilder(
       args.swigAddress,
@@ -74,8 +74,8 @@ export class AddMultipleAuthoritiesInstructionContextBuilder {
 
 export type AddMultipleAuthoritiesInstructionContextBuilderConfig = {
   signingFn?: SigningFn;
-  currentSlot?: bigint;
-  payer?: SolPublicKeyData;
+  currentSlot?: bigint | undefined;
+  payer?: SolPublicKeyData | undefined;
   createSwigInstructionContextPromise?: Promise<SwigInstructionContext>;
-  odometer?: number;
+  odometer?: number | undefined;
 };

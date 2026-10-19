@@ -454,7 +454,7 @@ function validateAndGetPreInstructions(
     throw new Error('ProgramExec requires exactly 1 preInstruction');
   }
 
-  const precedingIx = options.preInstructions[0];
+  const precedingIx = options.preInstructions[0]!;
 
   // Decode programId and instructionPrefix from authorityData
   const decoded = getProgramExecDecoder().decode(authorityData);

@@ -7,7 +7,7 @@ import {
   getProgramDerivedAddress,
   getUtf8Encoder,
 } from '@solana/kit';
-import { SWIG_PROGRAM_ADDRESS_STRING } from './consts';
+import { getSwigProgramAddress } from './consts';
 import { SolPublicKey, type SolPublicKeyData } from './solana';
 
 export function uint8ArraysEqual(a: Uint8Array, b: Uint8Array): boolean {
@@ -22,7 +22,7 @@ export function uint8ArraysEqual(a: Uint8Array, b: Uint8Array): boolean {
  */
 async function findSwigPda(id: Uint8Array) {
   return await getProgramDerivedAddress({
-    programAddress: address(SWIG_PROGRAM_ADDRESS_STRING),
+    programAddress: address(getSwigProgramAddress()),
     seeds: [getUtf8Encoder().encode('swig'), getBytesEncoder().encode(id)],
   });
 }
@@ -43,7 +43,7 @@ export async function findSwigPdaRaw(
 async function findSwigSystemAddressPda(swigAddress: SolPublicKeyData) {
   const swigAddressBytes = new SolPublicKey(swigAddress).toBytes();
   return await getProgramDerivedAddress({
-    programAddress: address(SWIG_PROGRAM_ADDRESS_STRING),
+    programAddress: address(getSwigProgramAddress()),
     seeds: [
       getUtf8Encoder().encode('swig-wallet-address'),
       getBytesEncoder().encode(swigAddressBytes),
@@ -72,7 +72,7 @@ async function findSwigSubAccountPda(swigId: Uint8Array, roleId: number) {
   view.setUint32(0, roleId, true);
 
   return await getProgramDerivedAddress({
-    programAddress: address(SWIG_PROGRAM_ADDRESS_STRING),
+    programAddress: address(getSwigProgramAddress()),
     seeds: [
       getUtf8Encoder().encode('sub-account'),
       getBytesEncoder().encode(swigId),
