@@ -9,78 +9,15 @@ on:
       - main
 
 env:
-  RUST_VERSION: 1.84.0
-  SOLANA_VERSION: 2.2.17
+  # Tests run against the swig-wallet commit we deploy: the last Halborn
+  # remediation commit. Rust and Solana match that commit's own CI.
+  SWIG_PROGRAM_REF: ff2929bb780c14bc679ff03a20d4800b0b3b54a4
+  RUST_VERSION: 1.91.0
+  SOLANA_VERSION: 3.1.11
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
-  release:
-    name: Release
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write # Required for changesets to create releases/PRs
-      pull-requests: write # Required for changesets to create PRs
-      id-token: write # Required for npm trusted publishing (OIDC)
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '24'
-
-      - name: Setup bun v2
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install Dependencies
-        run: bun install
-
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: bun release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
-
-  docs:
-    permissions:
-      id-token: 'write'
-      pages: 'write'
-    name: Docs
-    if: github.event_name == 'push'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v4
-
-      - name: Setup bun v2
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install Dependencies
-        run: bun install
-
-      - name: 'Build repo'
-        run: bun run build:packages
-
-      - name: 'Build documentation'
-        run: bun build:docs
-
-      - name: 'Upload Pages artifact'
-        uses: 'actions/upload-pages-artifact@v3'
-        with:
-          name: github-pages
-          path: docs/
-
-      - id: 'deployment'
-        name: 'Deploy documentation to GitHub Pages'
-        uses: 'actions/deploy-pages@v4'
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -149,7 +86,7 @@ jobs:
           solana --version
 
       - name: Update program bin
-        run: bun update:program
+        run: bun update:program "$SWIG_PROGRAM_REF"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
