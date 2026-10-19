@@ -237,10 +237,11 @@ describe('UpdateAuthorityV1 Instruction', () => {
       swig = fetchSwig(svm, swigAddress);
       const spenderRole = swig.findRolesByEd25519SignerPk(spender.publicKey)[0];
 
-      // Add multiple actions: SOL limit and programAll
+      // getAddAuthorityInstructionContext already gave the role ProgramAll,
+      // and the program rejects a second one (DuplicateNonRepeatableAction).
       const additionalActions = Actions.set()
         .solLimit({ amount: SOL })
-        .programAll()
+        .closeSwigAuthority()
         .get();
       const updateIx = await getUpdateAuthorityInstructionContext(
         swig,
@@ -254,6 +255,7 @@ describe('UpdateAuthorityV1 Instruction', () => {
       const updatedRole = swig.findRolesByEd25519SignerPk(spender.publicKey)[0];
       expect(updatedRole.actions.canManageAuthority()).toBe(true);
       expect(updatedRole.actions.canSpendSol()).toBe(true);
+      expect(updatedRole.actions.canCloseSwigAuthority()).toBe(true);
       expect(updatedRole.actions.hasProgramAction()).toBe(true);
     });
   });
