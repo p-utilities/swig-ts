@@ -11,7 +11,7 @@ import {
   type IInstructionWithData,
   type ReadonlyUint8Array,
 } from '@solana/kit';
-import { SWIG_PROGRAM_ADDRESS_STRING } from './consts';
+import { getSwigProgramAddress } from './consts';
 
 /**
  * Utility representing a Solana PublicKey
@@ -277,7 +277,7 @@ export function swigInstruction(
   return new SolInstruction({
     data,
     accounts,
-    program: new SolPublicKey(SWIG_PROGRAM_ADDRESS_STRING),
+    program: new SolPublicKey(getSwigProgramAddress()),
   });
 }
 
