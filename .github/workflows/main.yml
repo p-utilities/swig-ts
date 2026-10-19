@@ -9,8 +9,11 @@ on:
       - main
 
 env:
-  RUST_VERSION: 1.84.0
-  SOLANA_VERSION: 2.2.17
+  # Tests run against the swig-wallet commit we deploy: the last Halborn
+  # remediation commit. Rust and Solana match that commit's own CI.
+  SWIG_PROGRAM_REF: ff2929bb780c14bc679ff03a20d4800b0b3b54a4
+  RUST_VERSION: 1.91.0
+  SOLANA_VERSION: 3.1.11
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -83,7 +86,7 @@ jobs:
           solana --version
 
       - name: Update program bin
-        run: bun update:program
+        run: bun update:program "$SWIG_PROGRAM_REF"
         env:
           GITHUB_TOKEN: ${{ github.token }}
 
